@@ -1,0 +1,566 @@
+------------------ BASE-MLP Emotions Model ------------------
+Hyper Parameters:{'activation': 'relu', 'alpha': 0.0001, 'batch_size': 'auto', 'beta_1': 0.9, 'beta_2': 0.999, 'early_stopping': False, 'epsilon': 1e-08, 'hidden_layer_sizes': (100,), 'learning_rate': 'constant', 'learning_rate_init': 0.001, 'max_fun': 15000, 'max_iter': 200, 'momentum': 0.9, 'n_iter_no_change': 10, 'nesterovs_momentum': True, 'power_t': 0.5, 'random_state': None, 'shuffle': True, 'solver': 'adam', 'tol': 0.0001, 'validation_fraction': 0.1, 'verbose': True, 'warm_start': False}
+
+Confusion Matrix: 
+[[ 947   33    9   10   38   23    0    9   10    3    4    8    1   16
+    10   56    1   49   89    0  733   24    5    0    3    0    5   32]
+ [  37  499    7   21    5    0    3    3    0    1    2    4    2    1
+     4   12    0   46   16    0  517    6    0    3    0    0   14   12]
+ [  16   13  258   70    3    4    1    9    3    8   13   18    3    0
+     2    5    1    2    6    0  568    2    0    0    1    5    8    4]
+ [  31   22  113  124   22    5   12    5    3   19   30   26    5    1
+     8   20    1    3   15    0 1163    7    0    1    0    4   10    7]
+ [ 117   35   13   27  138   20    9    8   11   10   20    5    2    5
+     3   22    0   24   43    1 1621   28    1    5    3    3   10    8]
+ [  11    6    7    7    7   89    1    5    3    1    4    1    0    0
+     3    9    0   21    9    2  429   31    1    1    1    3   14    1]
+ [  11    9   11   14   12    2   76   63    1    7    5    2    0    0
+     2    1    0    5    8    0  749    4    0    3    0    2    5    9]
+ [  26    7   12    8    8    3   34  175    1    6    3    2    0    7
+     3    2    1    6    5    0  836   10    0    0    0    2    6   19]
+ [   8    6    2    2    4    2    0    0   67    2    0    0    0    1
+     1    6    0    6    7    0  246   28    0    0    1    0    1    2]
+ [  15   11   19   37   10    3    6    5    5   34   16   13    2    0
+     5    7    0    5    6    3  663    6    0    6    1    8   41   12]
+ [  14   11   32   35   25    2    6    4    2   15   84   14    3    0
+     7    9    0    3   12    0 1210   10    0    2    0    4   18   12]
+ [   9    7   45   34    1    0    1    1    0   11    8   80    3    0
+     7    2    0    1    3    1  328    0    0    1    0    0   12    4]
+ [   2    4    7    4    3    1    1    1    0    0    3    5   24    1
+     2    2    0    1    3    0  196    1    0    2    1    6    5    3]
+ [  71   14   12    5    5    0    0    7    0    2    2    2    0   55
+     0   20    0   51   19    1  312   12    1    2    1    0    2   20]
+ [   6    9    5    0    1    7    0    1    1    9    0    5    2    0
+    90    1    0    0    1    4  201    2    0    1    0    0    7    3]
+ [  76   11    2    2    4   15    0    1    4    1    1    1    0    1
+     1 1070    0   35    6    0  127   20    1    0    3    6    5    2]
+ [   3    0    4    3    1    1    0    0    0    2    1    0    0    0
+     2    1    1    0    1    0   39    0    0    0    0    3   13    0]
+ [  85   72    4    8   10    5    1    5    5    2    2    1    0    4
+     2   31    1  201   42    0  358    8    1    2    1    1    1    8]
+ [  59   13    3    7   12    6    1    1    2    2    2    1    0    2
+     1    6    0   26  596    0  242    4    0    0    0    1    5    5]
+ [   0    3    5    5    1    1    0    0    1    3    0    1    0    1
+     5    1    0    1    1   10  110    5    0    0    0    1    4    3]
+ [ 279  147  165  131  150   93   59  109   45   42   89   41    7   27
+    45   84    9   88  131    6 9121   83    9   19    5   20   66   71]
+ [  34   10    7    7   13   16    0    3   15    4    4    0    0    6
+     2   24    0   14   19    0  518  228    1    0    1    1    3    6]
+ [  16    3    0    3    4    0    0    0    1    1    0    0    0    2
+     1    6    0    7    0    0   86    1    7    0    0    0    1    2]
+ [  16   25   11   13   16    4    6    4    2    7   11    8    2    1
+     5    6    0    7    7    1  743    8    0   12    0    4    7   10]
+ [   9    3    1    1    7    5    0    0    0    1    1    1    0    0
+     0   14    0    7    2    0  103    3    0    0    4    0    3    3]
+ [   4    2    4    3    2    6    2    1    1    2    4    1    2    1
+     1    9    2    2    1    0  143    1    0    2    0   77   40    0]
+ [   8    7   11   17    4    4    1    2    2   38   10    4    5    1
+    10    7    2    5    7    3  423    9    2    1    1   31  174    2]
+ [  44    7   16   11    6    0    6   15    0    6    4    5    0    8
+     6    5    1    7    2    0  423    3    0    1    0    3    5  135]]
+
+Classification Report 
+                precision    recall  f1-score   support
+
+    admiration       0.48      0.45      0.47      2118
+     amusement       0.50      0.41      0.45      1215
+         anger       0.33      0.25      0.29      1023
+     annoyance       0.20      0.07      0.11      1657
+      approval       0.27      0.06      0.10      2192
+        caring       0.28      0.13      0.18       667
+     confusion       0.34      0.08      0.12      1001
+     curiosity       0.40      0.15      0.22      1182
+        desire       0.36      0.17      0.23       392
+disappointment       0.14      0.04      0.06       939
+   disapproval       0.26      0.05      0.09      1534
+       disgust       0.32      0.14      0.20       559
+ embarrassment       0.38      0.09      0.14       278
+    excitement       0.39      0.09      0.15       616
+          fear       0.39      0.25      0.31       356
+     gratitude       0.74      0.77      0.76      1395
+         grief       0.05      0.01      0.02        75
+           joy       0.32      0.23      0.27       861
+          love       0.56      0.60      0.58       997
+   nervousness       0.31      0.06      0.10       162
+       neutral       0.41      0.82      0.55     11141
+      optimism       0.42      0.24      0.31       936
+         pride       0.24      0.05      0.08       141
+   realization       0.19      0.01      0.02       936
+        relief       0.15      0.02      0.04       168
+       remorse       0.42      0.25      0.31       313
+       sadness       0.36      0.22      0.27       791
+      surprise       0.34      0.19      0.24       719
+
+      accuracy                           0.42     34364
+     macro avg       0.34      0.21      0.24     34364
+  weighted avg       0.38      0.42      0.35     34364
+
+
+------------------ BASE-MLP Sentiments Model ------------------
+Hyper Parameters:{'activation': 'relu', 'alpha': 0.0001, 'batch_size': 'auto', 'beta_1': 0.9, 'beta_2': 0.999, 'early_stopping': False, 'epsilon': 1e-08, 'hidden_layer_sizes': (100,), 'learning_rate': 'constant', 'learning_rate_init': 0.001, 'max_fun': 15000, 'max_iter': 200, 'momentum': 0.9, 'n_iter_no_change': 10, 'nesterovs_momentum': True, 'power_t': 0.5, 'random_state': None, 'shuffle': True, 'solver': 'adam', 'tol': 0.0001, 'validation_fraction': 0.1, 'verbose': True, 'warm_start': False}
+
+Confusion Matrix: 
+[[1147  524 1396  795]
+ [ 430 3680 2241 1405]
+ [ 889 1773 5651 2664]
+ [ 396  894 2346 8133]]
+
+Classification Report 
+              precision    recall  f1-score   support
+
+   ambiguous       0.40      0.30      0.34      3862
+    negative       0.54      0.47      0.50      7756
+     neutral       0.49      0.51      0.50     10977
+    positive       0.63      0.69      0.66     11769
+
+    accuracy                           0.54     34364
+   macro avg       0.51      0.49      0.50     34364
+weighted avg       0.54      0.54      0.54     34364
+
+
+------------------ TOP-MLP Emotions Model ------------------
+Hyper Parameters:{'cv': None, 'error_score': nan, 'estimator__activation': 'relu', 'estimator__alpha': 0.0001, 'estimator__batch_size': 'auto', 'estimator__beta_1': 0.9, 'estimator__beta_2': 0.999, 'estimator__early_stopping': True, 'estimator__epsilon': 1e-08, 'estimator__hidden_layer_sizes': (100,), 'estimator__learning_rate': 'constant', 'estimator__learning_rate_init': 0.001, 'estimator__max_fun': 15000, 'estimator__max_iter': 15, 'estimator__momentum': 0.9, 'estimator__n_iter_no_change': 10, 'estimator__nesterovs_momentum': True, 'estimator__power_t': 0.5, 'estimator__random_state': None, 'estimator__shuffle': True, 'estimator__solver': 'adam', 'estimator__tol': 0.0001, 'estimator__validation_fraction': 0.1, 'estimator__verbose': True, 'estimator__warm_start': False, 'estimator': MLPClassifier(early_stopping=True, max_iter=15, verbose=True), 'n_jobs': None, 'param_grid': {'activation': ['tanh'], 'hidden_layer_sizes': [(3, 30)], 'solver': ['sgd']}, 'pre_dispatch': '2*n_jobs', 'refit': True, 'return_train_score': False, 'scoring': None, 'verbose': 0}
+
+Confusion Matrix: 
+[[    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0   267     0     0     0     0  1851     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0    38     0     0     0     0  1177     0     0     0
+      0     0     0     0]
+ [    1     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     3     0     0     0     0  1019     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0    12     0     0     0     0  1645     0     0     0
+      0     0     0     0]
+ [    1     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0    43     0     0     0     0  2148     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0    36     0     0     0     0   631     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     6     0     0     0     0   995     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     8     0     0     0     0  1174     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0    12     0     0     0     0   380     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0    11     0     0     0     0   928     0     0     0
+      0     0     0     0]
+ [    1     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     9     0     0     0     0  1524     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     3     0     0     0     0   556     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     5     0     0     0     0   273     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0    71     0     0     0     0   545     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     2     0     0     0     0   354     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0   685     0     0     0     0   710     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     5     0     0     0     0    70     0     0     0
+      0     0     0     0]
+ [    0     1     0     0     0     0     0     0     0     0     0     0
+      0     0     0    87     0     0     0     0   773     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0   134     0     0     0     0   863     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     1     0     0     0     0   161     0     0     0
+      0     0     0     0]
+ [    2     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0   159     0     0     0     0 10980     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0    33     0     0     0     0   903     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     7     0     0     0     0   134     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0    11     0     0     0     0   925     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     9     0     0     0     0   159     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0    20     0     0     0     0   293     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0    29     0     0     0     0   762     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0    18     0     0     0     0   701     0     0     0
+      0     0     0     0]]
+
+Classification Report 
+                precision    recall  f1-score   support
+
+    admiration       0.00      0.00      0.00      2118
+     amusement       0.00      0.00      0.00      1215
+         anger       0.00      0.00      0.00      1023
+     annoyance       0.00      0.00      0.00      1657
+      approval       0.00      0.00      0.00      2192
+        caring       0.00      0.00      0.00       667
+     confusion       0.00      0.00      0.00      1001
+     curiosity       0.00      0.00      0.00      1182
+        desire       0.00      0.00      0.00       392
+disappointment       0.00      0.00      0.00       939
+   disapproval       0.00      0.00      0.00      1534
+       disgust       0.00      0.00      0.00       559
+ embarrassment       0.00      0.00      0.00       278
+    excitement       0.00      0.00      0.00       616
+          fear       0.00      0.00      0.00       356
+     gratitude       0.40      0.49      0.44      1395
+         grief       0.00      0.00      0.00        75
+           joy       0.00      0.00      0.00       861
+          love       0.00      0.00      0.00       997
+   nervousness       0.00      0.00      0.00       162
+       neutral       0.34      0.99      0.50     11141
+      optimism       0.00      0.00      0.00       936
+         pride       0.00      0.00      0.00       141
+   realization       0.00      0.00      0.00       936
+        relief       0.00      0.00      0.00       168
+       remorse       0.00      0.00      0.00       313
+       sadness       0.00      0.00      0.00       791
+      surprise       0.00      0.00      0.00       719
+
+      accuracy                           0.34     34364
+     macro avg       0.03      0.05      0.03     34364
+  weighted avg       0.13      0.34      0.18     34364
+
+
+------------------ TOP-MLP Sentiments Model ------------------
+Hyper Parameters:{'cv': None, 'error_score': nan, 'estimator__activation': 'relu', 'estimator__alpha': 0.0001, 'estimator__batch_size': 'auto', 'estimator__beta_1': 0.9, 'estimator__beta_2': 0.999, 'estimator__early_stopping': True, 'estimator__epsilon': 1e-08, 'estimator__hidden_layer_sizes': (100,), 'estimator__learning_rate': 'constant', 'estimator__learning_rate_init': 0.001, 'estimator__max_fun': 15000, 'estimator__max_iter': 15, 'estimator__momentum': 0.9, 'estimator__n_iter_no_change': 10, 'estimator__nesterovs_momentum': True, 'estimator__power_t': 0.5, 'estimator__random_state': None, 'estimator__shuffle': True, 'estimator__solver': 'adam', 'estimator__tol': 0.0001, 'estimator__validation_fraction': 0.1, 'estimator__verbose': True, 'estimator__warm_start': False, 'estimator': MLPClassifier(early_stopping=True, max_iter=15, verbose=True), 'n_jobs': None, 'param_grid': {'activation': ['identity'], 'hidden_layer_sizes': [(3, 30)], 'solver': ['adam']}, 'pre_dispatch': '2*n_jobs', 'refit': True, 'return_train_score': False, 'scoring': None, 'verbose': 0}
+
+Confusion Matrix: 
+[[ 510  671 1794  887]
+ [ 167 3631 2641 1317]
+ [ 343 1971 5899 2764]
+ [ 149 1151 2788 7681]]
+
+Classification Report 
+              precision    recall  f1-score   support
+
+   ambiguous       0.44      0.13      0.20      3862
+    negative       0.49      0.47      0.48      7756
+     neutral       0.45      0.54      0.49     10977
+    positive       0.61      0.65      0.63     11769
+
+    accuracy                           0.52     34364
+   macro avg       0.50      0.45      0.45     34364
+weighted avg       0.51      0.52      0.50     34364
+
+
+-----------------Wikipedia 2014 + Gigaword 5 ---------------
+------------------ TOP-MLP Emotions Model ------------------
+Hyper Parameters:{'cv': None, 'error_score': nan, 'estimator__activation': 'relu', 'estimator__alpha': 0.0001, 'estimator__batch_size': 'auto', 'estimator__beta_1': 0.9, 'estimator__beta_2': 0.999, 'estimator__early_stopping': True, 'estimator__epsilon': 1e-08, 'estimator__hidden_layer_sizes': (100,), 'estimator__learning_rate': 'constant', 'estimator__learning_rate_init': 0.001, 'estimator__max_fun': 15000, 'estimator__max_iter': 15, 'estimator__momentum': 0.9, 'estimator__n_iter_no_change': 10, 'estimator__nesterovs_momentum': True, 'estimator__power_t': 0.5, 'estimator__random_state': None, 'estimator__shuffle': True, 'estimator__solver': 'adam', 'estimator__tol': 0.0001, 'estimator__validation_fraction': 0.1, 'estimator__verbose': True, 'estimator__warm_start': False, 'estimator': MLPClassifier(early_stopping=True, max_iter=15, verbose=True), 'n_jobs': None, 'param_grid': {'activation': ['tanh'], 'hidden_layer_sizes': [(3, 30)], 'solver': ['sgd']}, 'pre_dispatch': '2*n_jobs', 'refit': True, 'return_train_score': False, 'scoring': None, 'verbose': 0}
+
+Confusion Matrix: 
+[[  307     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0  1811     0     0     0
+      0     0     0     0]
+ [   63     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0  1152     0     0     0
+      0     0     0     0]
+ [   27     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0   996     0     0     0
+      0     0     0     0]
+ [   17     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0  1640     0     0     0
+      0     0     0     0]
+ [   38     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0  2154     0     0     0
+      0     0     0     0]
+ [   24     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0   643     0     0     0
+      0     0     0     0]
+ [    1     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0  1000     0     0     0
+      0     0     0     0]
+ [    2     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0  1180     0     0     0
+      0     0     0     0]
+ [   12     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0   380     0     0     0
+      0     0     0     0]
+ [   12     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0   927     0     0     0
+      0     0     0     0]
+ [    8     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0  1526     0     0     0
+      0     0     0     0]
+ [   27     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0   532     0     0     0
+      0     0     0     0]
+ [    6     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0   272     0     0     0
+      0     0     0     0]
+ [   56     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0   560     0     0     0
+      0     0     0     0]
+ [   10     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0   346     0     0     0
+      0     0     0     0]
+ [  115     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0  1280     0     0     0
+      0     0     0     0]
+ [    1     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0    74     0     0     0
+      0     0     0     0]
+ [   65     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0   796     0     0     0
+      0     0     0     0]
+ [  112     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0   885     0     0     0
+      0     0     0     0]
+ [    6     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0   156     0     0     0
+      0     0     0     0]
+ [  149     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0 10992     0     0     0
+      0     0     0     0]
+ [   30     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0   906     0     0     0
+      0     0     0     0]
+ [    2     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0   139     0     0     0
+      0     0     0     0]
+ [    4     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0   932     0     0     0
+      0     0     0     0]
+ [    7     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0   161     0     0     0
+      0     0     0     0]
+ [    6     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0   307     0     0     0
+      0     0     0     0]
+ [   24     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0   767     0     0     0
+      0     0     0     0]
+ [   15     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0   704     0     0     0
+      0     0     0     0]]
+
+Classification Report 
+                precision    recall  f1-score   support
+
+    admiration       0.27      0.14      0.19      2118
+     amusement       0.00      0.00      0.00      1215
+         anger       0.00      0.00      0.00      1023
+     annoyance       0.00      0.00      0.00      1657
+      approval       0.00      0.00      0.00      2192
+        caring       0.00      0.00      0.00       667
+     confusion       0.00      0.00      0.00      1001
+     curiosity       0.00      0.00      0.00      1182
+        desire       0.00      0.00      0.00       392
+disappointment       0.00      0.00      0.00       939
+   disapproval       0.00      0.00      0.00      1534
+       disgust       0.00      0.00      0.00       559
+ embarrassment       0.00      0.00      0.00       278
+    excitement       0.00      0.00      0.00       616
+          fear       0.00      0.00      0.00       356
+     gratitude       0.00      0.00      0.00      1395
+         grief       0.00      0.00      0.00        75
+           joy       0.00      0.00      0.00       861
+          love       0.00      0.00      0.00       997
+   nervousness       0.00      0.00      0.00       162
+       neutral       0.33      0.99      0.50     11141
+      optimism       0.00      0.00      0.00       936
+         pride       0.00      0.00      0.00       141
+   realization       0.00      0.00      0.00       936
+        relief       0.00      0.00      0.00       168
+       remorse       0.00      0.00      0.00       313
+       sadness       0.00      0.00      0.00       791
+      surprise       0.00      0.00      0.00       719
+
+      accuracy                           0.33     34364
+     macro avg       0.02      0.04      0.02     34364
+  weighted avg       0.12      0.33      0.17     34364
+
+
+------------------ TOP-MLP Sentiments Model ------------------
+Hyper Parameters:{'cv': None, 'error_score': nan, 'estimator__activation': 'relu', 'estimator__alpha': 0.0001, 'estimator__batch_size': 'auto', 'estimator__beta_1': 0.9, 'estimator__beta_2': 0.999, 'estimator__early_stopping': True, 'estimator__epsilon': 1e-08, 'estimator__hidden_layer_sizes': (100,), 'estimator__learning_rate': 'constant', 'estimator__learning_rate_init': 0.001, 'estimator__max_fun': 15000, 'estimator__max_iter': 15, 'estimator__momentum': 0.9, 'estimator__n_iter_no_change': 10, 'estimator__nesterovs_momentum': True, 'estimator__power_t': 0.5, 'estimator__random_state': None, 'estimator__shuffle': True, 'estimator__solver': 'adam', 'estimator__tol': 0.0001, 'estimator__validation_fraction': 0.1, 'estimator__verbose': True, 'estimator__warm_start': False, 'estimator': MLPClassifier(early_stopping=True, max_iter=15, verbose=True), 'n_jobs': None, 'param_grid': {'activation': ['identity'], 'hidden_layer_sizes': [(3, 30)], 'solver': ['adam']}, 'pre_dispatch': '2*n_jobs', 'refit': True, 'return_train_score': False, 'scoring': None, 'verbose': 0}
+
+Confusion Matrix: 
+[[ 511  539 1964  848]
+ [ 136 2872 3135 1613]
+ [ 402 1558 5807 3210]
+ [ 125 1074 3290 7280]]
+
+Classification Report 
+              precision    recall  f1-score   support
+
+   ambiguous       0.44      0.13      0.20      3862
+    negative       0.48      0.37      0.42      7756
+     neutral       0.41      0.53      0.46     10977
+    positive       0.56      0.62      0.59     11769
+
+    accuracy                           0.48     34364
+   macro avg       0.47      0.41      0.42     34364
+weighted avg       0.48      0.48      0.47     34364
+
+
+-----ConceptNet, word2vec, GloVe, and OpenSubtitles 2016----
+------------------ TOP-MLP Emotions Model ------------------
+Hyper Parameters:{'cv': None, 'error_score': nan, 'estimator__activation': 'relu', 'estimator__alpha': 0.0001, 'estimator__batch_size': 'auto', 'estimator__beta_1': 0.9, 'estimator__beta_2': 0.999, 'estimator__early_stopping': True, 'estimator__epsilon': 1e-08, 'estimator__hidden_layer_sizes': (100,), 'estimator__learning_rate': 'constant', 'estimator__learning_rate_init': 0.001, 'estimator__max_fun': 15000, 'estimator__max_iter': 15, 'estimator__momentum': 0.9, 'estimator__n_iter_no_change': 10, 'estimator__nesterovs_momentum': True, 'estimator__power_t': 0.5, 'estimator__random_state': None, 'estimator__shuffle': True, 'estimator__solver': 'adam', 'estimator__tol': 0.0001, 'estimator__validation_fraction': 0.1, 'estimator__verbose': True, 'estimator__warm_start': False, 'estimator': MLPClassifier(early_stopping=True, max_iter=15, verbose=True), 'n_jobs': None, 'param_grid': {'activation': ['tanh'], 'hidden_layer_sizes': [(3, 30)], 'solver': ['sgd']}, 'pre_dispatch': '2*n_jobs', 'refit': True, 'return_train_score': False, 'scoring': None, 'verbose': 0}
+
+Confusion Matrix: 
+[[    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0  2118     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0  1215     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0  1023     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0  1657     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0  2192     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0   667     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0  1001     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0  1182     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0   392     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0   939     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0  1534     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0   559     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0   278     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0   616     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0   356     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0  1395     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0    75     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0   861     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0   997     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0   162     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0 11141     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0   936     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0   141     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0   936     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0   168     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0   313     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0   791     0     0     0
+      0     0     0     0]
+ [    0     0     0     0     0     0     0     0     0     0     0     0
+      0     0     0     0     0     0     0     0   719     0     0     0
+      0     0     0     0]]
+
+Classification Report 
+                precision    recall  f1-score   support
+
+    admiration       0.00      0.00      0.00      2118
+     amusement       0.00      0.00      0.00      1215
+         anger       0.00      0.00      0.00      1023
+     annoyance       0.00      0.00      0.00      1657
+      approval       0.00      0.00      0.00      2192
+        caring       0.00      0.00      0.00       667
+     confusion       0.00      0.00      0.00      1001
+     curiosity       0.00      0.00      0.00      1182
+        desire       0.00      0.00      0.00       392
+disappointment       0.00      0.00      0.00       939
+   disapproval       0.00      0.00      0.00      1534
+       disgust       0.00      0.00      0.00       559
+ embarrassment       0.00      0.00      0.00       278
+    excitement       0.00      0.00      0.00       616
+          fear       0.00      0.00      0.00       356
+     gratitude       0.00      0.00      0.00      1395
+         grief       0.00      0.00      0.00        75
+           joy       0.00      0.00      0.00       861
+          love       0.00      0.00      0.00       997
+   nervousness       0.00      0.00      0.00       162
+       neutral       0.32      1.00      0.49     11141
+      optimism       0.00      0.00      0.00       936
+         pride       0.00      0.00      0.00       141
+   realization       0.00      0.00      0.00       936
+        relief       0.00      0.00      0.00       168
+       remorse       0.00      0.00      0.00       313
+       sadness       0.00      0.00      0.00       791
+      surprise       0.00      0.00      0.00       719
+
+      accuracy                           0.32     34364
+     macro avg       0.01      0.04      0.02     34364
+  weighted avg       0.11      0.32      0.16     34364
+
+
+------------------ TOP-MLP Sentiments Model ------------------
+Hyper Parameters:{'cv': None, 'error_score': nan, 'estimator__activation': 'relu', 'estimator__alpha': 0.0001, 'estimator__batch_size': 'auto', 'estimator__beta_1': 0.9, 'estimator__beta_2': 0.999, 'estimator__early_stopping': True, 'estimator__epsilon': 1e-08, 'estimator__hidden_layer_sizes': (100,), 'estimator__learning_rate': 'constant', 'estimator__learning_rate_init': 0.001, 'estimator__max_fun': 15000, 'estimator__max_iter': 15, 'estimator__momentum': 0.9, 'estimator__n_iter_no_change': 10, 'estimator__nesterovs_momentum': True, 'estimator__power_t': 0.5, 'estimator__random_state': None, 'estimator__shuffle': True, 'estimator__solver': 'adam', 'estimator__tol': 0.0001, 'estimator__validation_fraction': 0.1, 'estimator__verbose': True, 'estimator__warm_start': False, 'estimator': MLPClassifier(early_stopping=True, max_iter=15, verbose=True), 'n_jobs': None, 'param_grid': {'activation': ['identity'], 'hidden_layer_sizes': [(3, 30)], 'solver': ['adam']}, 'pre_dispatch': '2*n_jobs', 'refit': True, 'return_train_score': False, 'scoring': None, 'verbose': 0}
+
+Confusion Matrix: 
+[[    0     0     0  3862]
+ [    0     0     0  7756]
+ [    0     0     0 10977]
+ [    0     0     0 11769]]
+
+Classification Report 
+              precision    recall  f1-score   support
+
+   ambiguous       0.00      0.00      0.00      3862
+    negative       0.00      0.00      0.00      7756
+     neutral       0.00      0.00      0.00     10977
+    positive       0.34      1.00      0.51     11769
+
+    accuracy                           0.34     34364
+   macro avg       0.09      0.25      0.13     34364
+weighted avg       0.12      0.34      0.17     34364
+
+
